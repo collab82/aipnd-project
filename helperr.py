@@ -1,8 +1,25 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from torch import nn, optim
+import torch
+from torch import nn, optim, tensor
 from torch.autograd import Variable
 
+import matplotlib.image as mpimg
+
+from torchvision import datasets, transforms, models
+import torchvision.models as models
+import torch.nn.functional as F
+from collections import OrderedDict
+from PIL import Image
+
+import PIL
+from PIL import Image
+import json
+from matplotlib.ticker import FormatStrFormatter
+
+arch = {"vgg16":25088,
+        "densenet121":1024,
+        "alexnet":9216}
 
 def test_network(net, trainloader):
 
