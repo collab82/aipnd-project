@@ -16,7 +16,6 @@ import copy
 import time
 import argparse
 
-import iutils
 
 ap = argparse.ArgumentParser(description='Predict.py')
 
@@ -28,7 +27,7 @@ ap.add_argument('--category_names', dest="category_names", action="store", defau
 ap.add_argument('--gpu', default="gpu", action="store", dest="gpu")
 
 pa = ap.parse_args()
-path_image = pa.input
+imp_path = pa.input
 number_of_outputs = pa.top_k
 device = pa.gpu
 
@@ -37,10 +36,10 @@ path = pa.checkpoint
 pa = ap.parse_args()
 
 def main():
-    model=iutils.load_checkpoint(path)
+    model=helperr.load_checkpoint(path)
     with open('cat_to_name.json', 'r') as json_file:
         cat_to_name = json.load(json_file)
-    probabilities = iutils.predict(path_image, model, number_of_outputs, device)
+    probabilities = helperr.predict(img_path, model, number_of_outputs, device)
     labels = [cat_to_name[str(index + 1)] for index in np.array(probabilities[1][0])]
     probability = np.array(probabilities[0][0])
     i=0
