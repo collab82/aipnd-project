@@ -17,7 +17,7 @@ import time
 
 import argparse
 
-import iutils
+
 
 ap = argparse.ArgumentParser(description='Train.py')
 
@@ -29,7 +29,7 @@ ap.add_argument('--learning_rate', dest="learning_rate", action="store", default
 ap.add_argument('--dropout', dest = "dropout", action = "store", default = 0.5)
 ap.add_argument('--epochs', dest="epochs", action="store", type=int, default=3)
 ap.add_argument('--model', dest="model", action="store", default="densenet121", type = str)
-ap.add_argument('--hidden_layers', type=int, dest="hidden_layers", action="store", default=4096)
+ap.add_argument('--hidden_layer1', type=int, dest="hidden_layer1", action="store", default=4096)
 
 
 
@@ -39,16 +39,16 @@ path = pa.save_dir
 lr = pa.learning_rate
 model = pa.model
 dropout = pa.dropout
-hidden_layers = pa.hidden_layers
+hidden_layer1 = pa.hidden_layer1
 device = pa.gpu
 epochs = pa.epochs
 
 def main():
     
-    trainloader, validloader, testloader = iutils.load_data(root)
-    model, optimizer, criterion = iutils.build_model(hidden_layers, class_to_idx)
-    iutils.train(model, epochs, lr, criterion, optimizer, trainloader, validloader)
-    iutils.save_checkpoint(model,path,structure,hidden_layers,dropout,lr)
+    trainloader, validloader, testloader = helperr.load_data(root)
+    model, optimizer, criterion = helperr.build_model(hidden_layer1, class_to_idx)
+    helperr.train(model, epochs, lr, criterion, optimizer, trainloader, validloader)
+    helperr.save_checkpoint(model,path,structure,hidden_layers,dropout,lr)
     print("Done Training!")
 
 
